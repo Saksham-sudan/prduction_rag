@@ -20,9 +20,9 @@ from ragas.embeddings import LangchainEmbeddingsWrapper
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from ragas import evaluate
 from ragas.run_config import RunConfig
-from langchain.rate_limiters import InMemoryRateLimiter
+from langchain_core.rate_limiters import InMemoryRateLimiter
 
-df = pd.read_csv(r"C:\Users\saksh\Documents\projects\Production RAG\eval\eval_testset.csv")
+df = pd.read_csv(r"./eval/eval_testset.csv")
 def eval_data():
     retrived_list = []
     answers_list = []
@@ -76,4 +76,4 @@ def eval_func():
     return df
 
 df = eval_func()
-df.to_csv(r"C:\Users\saksh\Documents\projects\Production RAG\eval\eval_result.csv")
+df.to_csv(r"./eval/eval_result.csv")

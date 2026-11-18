@@ -1,0 +1,32 @@
+name: eval_action
+
+on:
+  push:
+    branches: ["dev"]
+
+env:
+  GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+jobs:
+  standard-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11.9"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run RAG evaluation
+        run: python -m eval.eval_script
+
+      - name: Upload evaluation results
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval_result
+          path: eval/eval_result.csv
